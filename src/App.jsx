@@ -52,7 +52,12 @@ function App() {
               <a href="/#wesprzyj" className="text-sm font-bold text-slate-500 hover:text-orange-500 transition-colors">Wesprzyj nas</a>
               <a href="/#opinie" className="text-sm font-bold text-slate-500 hover:text-pink-500 transition-colors">Opinie</a>
               {uzytkownik ? (
-                <span className="px-5 py-2 rounded-xl bg-violet-100 text-violet-700 font-black text-sm">Cześć, {uzytkownik}!</span>
+                <div className="flex items-center gap-3">
+                  <span className="px-4 py-2 rounded-xl bg-violet-100 text-violet-700 font-black text-sm">Cześć, {uzytkownik}!</span>
+                  <button onClick={() => setUzytkownik(null)} style={{background:'#fee2e2',color:'#dc2626',border:'none',borderRadius:12,padding:'8px 16px',fontWeight:700,fontSize:13,cursor:'pointer'}}>
+                    Wyloguj
+                  </button>
+                </div>
               ) : (
                 <button onClick={() => setModalRej(true)} className="px-5 py-2.5 bg-violet-600 text-white font-black text-sm rounded-xl shadow-md hover:bg-violet-700 hover:-translate-y-0.5 transition-all">
                   Zarejestruj się

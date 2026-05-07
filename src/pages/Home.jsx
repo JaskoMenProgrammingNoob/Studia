@@ -31,6 +31,7 @@ const Lapa = ({ className, style }) => (
 function Home({ uzytkownik }) {
   const [zwierzeta, setZwierzeta] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [filtr, setFiltr] = useState('wszystkie');
   const [modalZbiorka, setModalZbiorka] = useState(null);
   const [kwota, setKwota] = useState('');
   const [sukcesZbiorka, setSukcesZbiorka] = useState(false);
@@ -93,6 +94,9 @@ function Home({ uzytkownik }) {
       Ładowanie piesków...
     </div>
   );
+
+  const gatunkiDostepne = ['wszystkie', ...new Set(zwierzeta.map(p => p.gatunek).filter(Boolean))];
+  const zwierzetaFiltrowane = filtr === 'wszystkie' ? zwierzeta : zwierzeta.filter(p => p.gatunek === filtr);
 
   const koloryCykl = [
     { cls: 'from-violet-500 to-fuchsia-500', hex: '#7c3aed', hexLight: '#ede9fe' },
@@ -181,15 +185,24 @@ function Home({ uzytkownik }) {
             </h2>
             <p className="text-slate-400 text-lg">Poznaj zwierzęta, które czekają właśnie na Ciebie</p>
           </div>
-          <div className="flex bg-white p-2 rounded-2xl border border-slate-100 shadow-sm">
-            <button style={{background:'#7c3aed',color:'white',fontWeight:700,padding:'12px 32px',borderRadius:12,border:'none',cursor:'pointer'}}>Wszystkie</button>
-            <button className="px-8 py-3 rounded-xl bg-slate-100 text-slate-600 text-sm font-bold hover:bg-slate-200 transition-all">Psy</button>
-            <button className="px-8 py-3 rounded-xl bg-slate-100 text-slate-600 text-sm font-bold hover:bg-slate-200 transition-all">Koty</button>
+          <div className="flex flex-wrap gap-2 bg-white p-2 rounded-2xl border border-slate-100 shadow-sm">
+            {gatunkiDostepne.map(g => (
+              <button
+                key={g}
+                onClick={() => setFiltr(g)}
+                style={filtr === g
+                  ? {background:'#7c3aed',color:'white',fontWeight:700,padding:'10px 24px',borderRadius:12,border:'none',cursor:'pointer',fontSize:14}
+                  : {background:'#f1f5f9',color:'#475569',fontWeight:700,padding:'10px 24px',borderRadius:12,border:'none',cursor:'pointer',fontSize:14}
+                }
+              >
+                {g === 'wszystkie' ? 'Wszystkie' : g.charAt(0).toUpperCase() + g.slice(1) + 'y'}
+              </button>
+            ))}
           </div>
         </div>
 
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 text-left">
-          {zwierzeta.map((pet, i) => {
+          {zwierzetaFiltrowane.map((pet, i) => {
             const k = koloryCykl[i % koloryCykl.length];
             return (
               <div key={pet._id} className="group relative rounded-[3rem] bg-white p-6 shadow-sm hover:shadow-2xl hover:-translate-y-4 transition-all duration-500 border border-slate-50 overflow-hidden">

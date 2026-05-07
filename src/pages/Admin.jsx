@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+
 function Admin() {
   const [token, setToken] = useState(() => sessionStorage.getItem('adminToken') || '');
   const [passwordInput, setPasswordInput] = useState('');
@@ -14,6 +15,8 @@ function Admin() {
     opis: '',
     gatunek: 'pies'
   });
+  const [customGatunek, setCustomGatunek] = useState('');
+  const [useCustomGatunek, setUseCustomGatunek] = useState(false);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -51,6 +54,8 @@ function Admin() {
       if (res.ok) {
         alert("✅ Sukces! Nowy zwierzak został dodany do bazy.");
         setFormData({ imie: '', rasa: '', wiek: '', status: 'Do adopcji', foto: '', opis: '', gatunek: 'pies' });
+        setCustomGatunek('');
+        setUseCustomGatunek(false);
       } else {
         alert("❌ Błąd serwera. Spróbuj ponownie.");
       }
@@ -125,14 +130,37 @@ function Admin() {
               </div>
               <div className="flex flex-col gap-2">
                 <label className="text-[10px] font-black uppercase tracking-widest text-[#13ec13] ml-2">Gatunek</label>
-                <select 
-                  value={formData.gatunek} 
-                  onChange={e => setFormData({...formData, gatunek: e.target.value})} 
+                <select
+                  value={useCustomGatunek ? '__inne' : formData.gatunek}
+                  onChange={e => {
+                    if (e.target.value === '__inne') {
+                      setUseCustomGatunek(true);
+                      setFormData({...formData, gatunek: ''});
+                    } else {
+                      setUseCustomGatunek(false);
+                      setCustomGatunek('');
+                      setFormData({...formData, gatunek: e.target.value});
+                    }
+                  }}
                   className="bg-zinc-800 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-[#13ec13] cursor-pointer"
                 >
                   <option value="pies">Pies</option>
                   <option value="kot">Kot</option>
+                  <option value="__inne">Inny gatunek...</option>
                 </select>
+                {useCustomGatunek && (
+                  <input
+                    required
+                    type="text"
+                    placeholder="np. królik, chomik, papuga..."
+                    value={customGatunek}
+                    onChange={e => {
+                      setCustomGatunek(e.target.value);
+                      setFormData({...formData, gatunek: e.target.value.toLowerCase().trim()});
+                    }}
+                    className="bg-white/5 border border-[#13ec13] p-4 rounded-2xl text-white outline-none mt-2"
+                  />
+                )}
               </div>
             </div>
 

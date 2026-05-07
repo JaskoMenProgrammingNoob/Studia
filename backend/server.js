@@ -40,7 +40,7 @@ function walidujZwierze(body) {
     if (!imie || !rasa || !wiek || !foto || !opis || !gatunek) return 'Wszystkie pola są wymagane.';
     if ([imie, rasa, wiek, status, foto, opis, gatunek].some(v => typeof v !== 'string')) return 'Nieprawidłowy typ danych.';
     if (imie.length > 50 || rasa.length > 100 || wiek.length > 30 || opis.length > 1000) return 'Przekroczono dozwoloną długość pola.';
-    if (!['pies', 'kot'].includes(gatunek)) return 'Gatunek musi być "pies" lub "kot".';
+    if (gatunek.length > 50) return 'Nazwa gatunku za długa.';
     if (!['Do adopcji', 'Zarezerwowany', 'Adoptowany'].includes(status)) return 'Nieprawidłowy status.';
     if (!foto.startsWith('https://')) return 'Link do zdjęcia musi zaczynać się od https://.';
     return null;
