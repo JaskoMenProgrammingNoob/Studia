@@ -94,7 +94,11 @@ function Home({ uzytkownik }) {
     </div>
   );
 
-  const koloryCykl = ['from-violet-500 to-fuchsia-500', 'from-orange-400 to-pink-500', 'from-emerald-400 to-teal-500'];
+  const koloryCykl = [
+    { cls: 'from-violet-500 to-fuchsia-500', hex: '#7c3aed', hexLight: '#ede9fe' },
+    { cls: 'from-orange-400 to-pink-500', hex: '#f97316', hexLight: '#ffedd5' },
+    { cls: 'from-emerald-400 to-teal-500', hex: '#10b981', hexLight: '#d1fae5' },
+  ];
 
   return (
     <div className="animate-in fade-in duration-1000">
@@ -118,7 +122,7 @@ function Home({ uzytkownik }) {
             </span>
             <h1 className="text-5xl lg:text-7xl font-black text-white leading-[1.1] mb-6">
               Każda łapa zasługuje na{' '}
-              <span className="bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">ciepły dom.</span>
+              <span style={{color:'#fde047'}}>ciepły dom.</span>
             </h1>
             <p className="text-lg text-purple-200 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
               Łapa Pomocy to miejsce, gdzie porzucone serca odnajdują nadzieję. Pomóż nam tworzyć historie ze szczęśliwym zakończeniem.
@@ -154,14 +158,14 @@ function Home({ uzytkownik }) {
         <div className="mx-auto max-w-[1200px] px-6">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { val: zwierzeta.length, label: 'Zwierząt w schronisku', kolor: 'from-violet-500 to-purple-600', bg: 'bg-violet-50', text: 'text-violet-600' },
-              { val: '148', label: 'Szczęśliwych adopcji', kolor: 'from-orange-400 to-pink-500', bg: 'bg-orange-50', text: 'text-orange-500' },
-              { val: '3', label: 'Lata działalności', kolor: 'from-emerald-400 to-teal-500', bg: 'bg-emerald-50', text: 'text-emerald-600' },
-              { val: '98%', label: 'Zadowolonych adopcji', kolor: 'from-blue-400 to-indigo-500', bg: 'bg-blue-50', text: 'text-blue-600' },
+              { val: zwierzeta.length, label: 'Zwierząt w schronisku', bgHex: '#ede9fe', colorHex: '#7c3aed' },
+              { val: '148', label: 'Szczęśliwych adopcji', bgHex: '#ffedd5', colorHex: '#f97316' },
+              { val: '3', label: 'Lata działalności', bgHex: '#d1fae5', colorHex: '#10b981' },
+              { val: '98%', label: 'Zadowolonych adopcji', bgHex: '#dbeafe', colorHex: '#3b82f6' },
             ].map((s) => (
-              <div key={s.label} className={`${s.bg} rounded-3xl p-8 text-center border border-white shadow-sm`}>
-                <p className={`text-5xl font-black mb-2 bg-gradient-to-r ${s.kolor} bg-clip-text text-transparent`}>{s.val}</p>
-                <p className={`${s.text} font-bold text-xs uppercase tracking-widest`}>{s.label}</p>
+              <div key={s.label} style={{background:s.bgHex}} className="rounded-3xl p-8 text-center border border-white shadow-sm">
+                <p style={{color:s.colorHex}} className="text-5xl font-black mb-2">{s.val}</p>
+                <p style={{color:s.colorHex}} className="font-bold text-xs uppercase tracking-widest">{s.label}</p>
               </div>
             ))}
           </div>
@@ -186,27 +190,27 @@ function Home({ uzytkownik }) {
 
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 text-left">
           {zwierzeta.map((pet, i) => {
-            const kolor = koloryCykl[i % koloryCykl.length];
+            const k = koloryCykl[i % koloryCykl.length];
             return (
               <div key={pet._id} className="group relative rounded-[3rem] bg-white p-6 shadow-sm hover:shadow-2xl hover:-translate-y-4 transition-all duration-500 border border-slate-50 overflow-hidden">
-                <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${kolor}`}></div>
+                <div style={{position:'absolute',top:0,left:0,right:0,height:6,background:k.hex,borderRadius:'24px 24px 0 0'}}></div>
                 <div className="relative h-72 w-full overflow-hidden rounded-[2.5rem] mb-8">
                   <img src={pet.foto} alt={pet.imie} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
                   <div className="absolute top-5 left-5">
-                    <span className="bg-white/90 backdrop-blur-md px-5 py-2 rounded-2xl text-[10px] font-black uppercase tracking-widest text-slate-900 shadow-xl">{pet.rasa}</span>
+                    <span className="bg-white px-5 py-2 rounded-2xl text-[10px] font-black uppercase tracking-widest text-slate-900 shadow-xl">{pet.rasa}</span>
                   </div>
                 </div>
                 <div className="px-2">
                   <div className="flex justify-between items-start mb-8">
                     <div>
                       <h4 className="text-3xl font-black text-slate-900 mb-1">{pet.imie}</h4>
-                      <p className={`font-bold text-sm uppercase tracking-tighter bg-gradient-to-r ${kolor} bg-clip-text text-transparent`}>{pet.wiek} • {pet.status}</p>
+                      <p style={{color:k.hex}} className="font-bold text-sm uppercase tracking-tighter">{pet.wiek} • {pet.status}</p>
                     </div>
-                    <div className={`w-14 h-14 flex items-center justify-center rounded-2xl bg-gradient-to-br ${kolor} text-white`}>
-                      <Lapa className="w-7 h-7 text-white" />
+                    <div style={{background:k.hex,width:56,height:56,borderRadius:16,display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
+                      <Lapa style={{width:28,height:28,color:'white'}} />
                     </div>
                   </div>
-                  <Link to={`/pies/${pet._id}`} className={`block w-full text-center rounded-[1.5rem] bg-gradient-to-r ${kolor} py-5 text-sm font-black text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl`}>
+                  <Link to={`/pies/${pet._id}`} style={{display:'block',width:'100%',textAlign:'center',borderRadius:24,padding:'20px 0',fontSize:14,fontWeight:900,color:'white',background:k.hex,textDecoration:'none',boxShadow:`0 8px 24px ${k.hex}55`}}>
                     Poznaj lepiej {pet.imie}
                   </Link>
                 </div>
@@ -224,7 +228,7 @@ function Home({ uzytkownik }) {
           <div className="text-center mb-16">
             <span className="inline-block px-4 py-1.5 rounded-full bg-pink-100 text-pink-600 font-bold text-[10px] mb-4 uppercase tracking-[0.2em]">Galeria</span>
             <h2 className="text-5xl font-black tracking-tight text-slate-900">
-              Nasze <span className="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent">słodkie</span> łapki
+              Nasze <span style={{color:'#f97316'}}>słodkie</span> łapki
             </h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -251,7 +255,7 @@ function Home({ uzytkownik }) {
           <div className="text-center mb-16">
             <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 text-orange-300 font-bold text-[10px] mb-4 uppercase tracking-[0.2em] border border-white/20">Zbiórki</span>
             <h2 className="text-5xl font-black tracking-tight text-white">
-              Wesprzyj nasze <span className="bg-gradient-to-r from-yellow-300 to-orange-400 bg-clip-text text-transparent">zbiórki</span>
+              Wesprzyj nasze <span style={{color:'#fde047'}}>zbiórki</span>
             </h2>
             <p className="text-slate-400 mt-4 text-lg">Każda złotówka pomaga naszym podopiecznym</p>
           </div>
@@ -293,7 +297,7 @@ function Home({ uzytkownik }) {
           <div className="text-center mb-16">
             <span className="inline-block px-4 py-1.5 rounded-full bg-pink-50 text-pink-500 font-bold text-[10px] mb-4 uppercase tracking-[0.2em]">Historie adopcji</span>
             <h2 className="text-5xl font-black tracking-tight text-slate-900">
-              Co mówią nasi <span className="bg-gradient-to-r from-pink-500 to-violet-600 bg-clip-text text-transparent">adoptujący</span>
+              Co mówią nasi <span style={{color:'#ec4899'}}>adoptujący</span>
             </h2>
           </div>
 
