@@ -120,7 +120,7 @@ function App() {
                     <button type="submit" disabled={ladowanie} className="bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-black py-4 rounded-2xl hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-60 mt-2">
                       {ladowanie ? 'Rejestrowanie...' : 'Zarejestruj się'}
                     </button>
-                    <button type="button" onClick={() => { setModalRej(false); setBlad(''); }} className="text-slate-400 font-bold text-sm hover:text-slate-600 transition-colors">
+                    <button type="button" onClick={() => { setModalRej(false); setBlad(''); }} className="bg-slate-100 text-slate-600 font-bold text-sm py-3 rounded-2xl hover:bg-slate-200 transition-all">
                       Anuluj
                     </button>
                   </form>

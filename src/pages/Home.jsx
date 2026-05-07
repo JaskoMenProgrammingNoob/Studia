@@ -126,7 +126,7 @@ function Home({ uzytkownik }) {
               <a href="#zwierzeta" className="px-10 py-5 bg-white text-violet-700 font-black rounded-2xl shadow-xl hover:bg-yellow-300 hover:text-slate-900 hover:-translate-y-1 transition-all duration-300 text-center">
                 Adoptuj teraz
               </a>
-              <a href="#wesprzyj" className="px-10 py-5 bg-white/10 backdrop-blur-sm border-2 border-white/40 text-white font-black rounded-2xl hover:bg-white/20 hover:-translate-y-1 transition-all duration-300 text-center">
+              <a href="#wesprzyj" className="px-10 py-5 bg-orange-400 text-white font-black rounded-2xl shadow-xl shadow-orange-500/30 hover:bg-orange-500 hover:-translate-y-1 transition-all duration-300 text-center">
                 Wesprzyj nas
               </a>
             </div>
@@ -178,8 +178,8 @@ function Home({ uzytkownik }) {
           </div>
           <div className="flex bg-white p-2 rounded-2xl border border-slate-100 shadow-sm">
             <button className="px-8 py-3 rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white text-sm font-bold shadow-lg">Wszystkie</button>
-            <button className="px-8 py-3 rounded-xl text-slate-400 text-sm font-bold hover:text-slate-900 transition-all">Psy</button>
-            <button className="px-8 py-3 rounded-xl text-slate-400 text-sm font-bold hover:text-slate-900 transition-all">Koty</button>
+            <button className="px-8 py-3 rounded-xl bg-slate-100 text-slate-600 text-sm font-bold hover:bg-slate-200 transition-all">Psy</button>
+            <button className="px-8 py-3 rounded-xl bg-slate-100 text-slate-600 text-sm font-bold hover:bg-slate-200 transition-all">Koty</button>
           </div>
         </div>
 
@@ -426,7 +426,7 @@ function Home({ uzytkownik }) {
                   <button type="submit" className={`${modalZbiorka.kolorBtn} text-white font-black py-4 rounded-2xl transition-all hover:scale-[1.02] active:scale-95`}>
                     Wpłać {kwota ? `${kwota} zł` : ''}
                   </button>
-                  <button type="button" onClick={() => { setModalZbiorka(null); setKwota(''); }} className="text-slate-400 font-bold text-sm hover:text-slate-600 transition-colors">Anuluj</button>
+                  <button type="button" onClick={() => { setModalZbiorka(null); setKwota(''); }} className="bg-slate-100 text-slate-600 font-bold text-sm py-3 rounded-2xl hover:bg-slate-200 transition-all">Anuluj</button>
                 </form>
               </>
             )}
