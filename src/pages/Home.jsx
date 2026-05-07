@@ -18,8 +18,8 @@ const GALERIA = [
   { url: 'https://images.unsplash.com/photo-1561037404-61cd46aa615b?w=600&q=80', opis: 'Wesoły piesek' },
 ];
 
-const Lapa = ({ className }) => (
-  <svg className={className} viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+const Lapa = ({ className, style }) => (
+  <svg className={className} style={style} viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <ellipse cx="50" cy="62" rx="22" ry="18" />
     <ellipse cx="22" cy="45" rx="11" ry="13" transform="rotate(-20 22 45)" />
     <ellipse cx="38" cy="32" rx="11" ry="13" />
@@ -101,10 +101,10 @@ function Home({ uzytkownik }) {
 
       {/* --- HERO --- */}
       <section className="relative overflow-hidden bg-gradient-to-br from-violet-600 via-purple-700 to-fuchsia-700 py-20 lg:py-32">
-        <Lapa className="absolute top-10 left-8 w-16 h-16 text-white/10 rotate-12" />
-        <Lapa className="absolute top-32 right-16 w-12 h-12 text-white/10 -rotate-6" />
-        <Lapa className="absolute bottom-16 left-1/4 w-10 h-10 text-white/10 rotate-45" />
-        <Lapa className="absolute bottom-8 right-1/3 w-14 h-14 text-yellow-300/20 -rotate-12" />
+        <Lapa style={{position:'absolute',top:40,left:32,width:64,height:64,color:'rgba(255,255,255,0.12)',transform:'rotate(12deg)',pointerEvents:'none'}} />
+        <Lapa style={{position:'absolute',top:128,right:64,width:48,height:48,color:'rgba(255,255,255,0.10)',transform:'rotate(-6deg)',pointerEvents:'none'}} />
+        <Lapa style={{position:'absolute',bottom:64,left:'25%',width:40,height:40,color:'rgba(255,255,255,0.10)',transform:'rotate(45deg)',pointerEvents:'none'}} />
+        <Lapa style={{position:'absolute',bottom:32,right:'33%',width:56,height:56,color:'rgba(253,224,71,0.18)',transform:'rotate(-12deg)',pointerEvents:'none'}} />
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute -top-20 -left-20 w-96 h-96 bg-pink-400/20 rounded-full blur-[120px]"></div>
           <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-blue-400/20 rounded-full blur-[120px]"></div>
@@ -136,11 +136,11 @@ function Home({ uzytkownik }) {
             <div className="relative z-10 overflow-hidden rounded-[4rem] shadow-2xl shadow-black/30 rotate-2 hover:rotate-0 transition-transform duration-700 border-4 border-white/20">
               <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&q=80&w=800" alt="Szczęśliwe psy" className="w-full h-full object-cover" />
             </div>
-            <div className="absolute -top-6 -right-6 w-24 h-24 bg-yellow-300 rounded-3xl rotate-12 opacity-80 flex items-center justify-center">
-              <Lapa className="w-12 h-12 text-orange-500" />
+            <div style={{position:'absolute',top:-24,right:-24,width:96,height:96,background:'#fde047',borderRadius:24,transform:'rotate(12deg)',opacity:0.85,display:'flex',alignItems:'center',justifyContent:'center'}}>
+              <Lapa style={{width:48,height:48,color:'#ea580c'}} />
             </div>
-            <div className="absolute -bottom-6 -left-6 w-16 h-16 bg-pink-400 rounded-2xl -rotate-12 opacity-80 flex items-center justify-center">
-              <Lapa className="w-8 h-8 text-white" />
+            <div style={{position:'absolute',bottom:-24,left:-24,width:64,height:64,background:'#f472b6',borderRadius:16,transform:'rotate(-12deg)',opacity:0.85,display:'flex',alignItems:'center',justifyContent:'center'}}>
+              <Lapa style={{width:32,height:32,color:'white'}} />
             </div>
           </div>
         </div>
@@ -148,8 +148,8 @@ function Home({ uzytkownik }) {
 
       {/* --- STATYSTYKI --- */}
       <section className="py-16 bg-slate-50 relative overflow-hidden">
-        <Lapa className="absolute right-8 top-4 w-20 h-20 text-violet-100 rotate-12" />
-        <Lapa className="absolute left-4 bottom-4 w-16 h-16 text-orange-100 -rotate-6" />
+        <Lapa style={{position:'absolute',right:32,top:16,width:80,height:80,color:'#ede9fe',transform:'rotate(12deg)',pointerEvents:'none'}} />
+        <Lapa style={{position:'absolute',left:16,bottom:16,width:64,height:64,color:'#ffedd5',transform:'rotate(-6deg)',pointerEvents:'none'}} />
         <div className="mx-auto max-w-[1200px] px-6">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {[
@@ -217,8 +217,8 @@ function Home({ uzytkownik }) {
 
       {/* --- GALERIA --- */}
       <section className="py-24 bg-slate-50 relative overflow-hidden">
-        <Lapa className="absolute top-8 left-8 w-20 h-20 text-pink-200 rotate-12" />
-        <Lapa className="absolute bottom-8 right-8 w-16 h-16 text-violet-200 -rotate-12" />
+        <Lapa style={{position:'absolute',top:32,left:32,width:80,height:80,color:'#fbcfe8',pointerEvents:'none'}} />
+        <Lapa style={{position:'absolute',bottom:32,right:32,width:64,height:64,color:'#ddd6fe',pointerEvents:'none'}} />
         <div className="mx-auto max-w-[1200px] px-6">
           <div className="text-center mb-16">
             <span className="inline-block px-4 py-1.5 rounded-full bg-pink-100 text-pink-600 font-bold text-[10px] mb-4 uppercase tracking-[0.2em]">Galeria</span>
@@ -244,8 +244,8 @@ function Home({ uzytkownik }) {
 
       {/* --- WESPRZYJ NAS --- */}
       <section id="wesprzyj" className="py-24 bg-gradient-to-br from-slate-900 via-violet-950 to-slate-900 relative overflow-hidden">
-        <Lapa className="absolute top-12 right-12 w-24 h-24 text-white/5 rotate-20" />
-        <Lapa className="absolute bottom-12 left-12 w-20 h-20 text-white/5 -rotate-15" />
+        <Lapa style={{position:'absolute',top:48,right:48,width:96,height:96,color:'rgba(255,255,255,0.05)',pointerEvents:'none'}} />
+        <Lapa style={{position:'absolute',bottom:48,left:48,width:80,height:80,color:'rgba(255,255,255,0.05)',pointerEvents:'none'}} />
         <div className="mx-auto max-w-[1200px] px-6">
           <div className="text-center mb-16">
             <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 text-orange-300 font-bold text-[10px] mb-4 uppercase tracking-[0.2em] border border-white/20">Zbiórki</span>
@@ -286,8 +286,8 @@ function Home({ uzytkownik }) {
 
       {/* --- OPINIE --- */}
       <section id="opinie" className="bg-white py-24 border-t border-slate-50 relative overflow-hidden">
-        <Lapa className="absolute top-8 right-8 w-16 h-16 text-pink-100 rotate-12" />
-        <Lapa className="absolute bottom-8 left-8 w-12 h-12 text-violet-100 -rotate-6" />
+        <Lapa style={{position:'absolute',top:32,right:32,width:64,height:64,color:'#fce7f3',pointerEvents:'none'}} />
+        <Lapa style={{position:'absolute',bottom:32,left:32,width:48,height:48,color:'#ede9fe',pointerEvents:'none'}} />
         <div className="mx-auto max-w-[1200px] px-6">
           <div className="text-center mb-16">
             <span className="inline-block px-4 py-1.5 rounded-full bg-pink-50 text-pink-500 font-bold text-[10px] mb-4 uppercase tracking-[0.2em]">Historie adopcji</span>
