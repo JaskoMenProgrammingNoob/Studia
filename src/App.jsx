@@ -41,10 +41,10 @@ function App() {
         <header className="sticky top-0 z-50 w-full border-b border-purple-100 bg-white/90 backdrop-blur-md px-6 py-4 md:px-20">
           <div className="mx-auto flex max-w-[1200px] items-center justify-between">
             <a href="/" className="flex items-center gap-3 cursor-pointer">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 text-white shadow-lg shadow-violet-200">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-600 text-white shadow-lg">
                 <span className="material-symbols-outlined text-2xl">pets</span>
               </div>
-              <h2 className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-violet-600 to-fuchsia-500 bg-clip-text text-transparent">Łapa Pomocy</h2>
+              <h2 className="text-xl font-extrabold tracking-tight text-violet-600">Łapa Pomocy</h2>
             </a>
 
             <div className="flex items-center gap-6">
@@ -54,7 +54,7 @@ function App() {
               {uzytkownik ? (
                 <span className="px-5 py-2 rounded-xl bg-violet-100 text-violet-700 font-black text-sm">Cześć, {uzytkownik}!</span>
               ) : (
-                <button onClick={() => setModalRej(true)} className="px-5 py-2.5 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-black text-sm rounded-xl shadow-md hover:shadow-violet-200 hover:-translate-y-0.5 transition-all">
+                <button onClick={() => setModalRej(true)} className="px-5 py-2.5 bg-violet-600 text-white font-black text-sm rounded-xl shadow-md hover:bg-violet-700 hover:-translate-y-0.5 transition-all">
                   Zarejestruj się
                 </button>
               )}
