@@ -35,13 +35,22 @@ function Admin() {
     e.preventDefault();
 
     try {
+      const dataToSend = useCustomGatunek
+        ? { ...formData, gatunek: customGatunek.toLowerCase().trim() }
+        : formData;
+
+      if (useCustomGatunek && !customGatunek.trim()) {
+        alert('Podaj nazwę gatunku.');
+        return;
+      }
+
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/nowy-obiekt`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(dataToSend)
       });
 
       if (res.status === 401) {
