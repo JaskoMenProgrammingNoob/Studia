@@ -100,14 +100,15 @@ function Home({ uzytkownik }) {
     <div className="animate-in fade-in duration-1000">
 
       {/* --- HERO --- */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-violet-600 via-purple-700 to-fuchsia-700 py-20 lg:py-32">
-        <Lapa style={{position:'absolute',top:40,left:32,width:64,height:64,color:'rgba(255,255,255,0.12)',transform:'rotate(12deg)',pointerEvents:'none'}} />
-        <Lapa style={{position:'absolute',top:128,right:64,width:48,height:48,color:'rgba(255,255,255,0.10)',transform:'rotate(-6deg)',pointerEvents:'none'}} />
-        <Lapa style={{position:'absolute',bottom:64,left:'25%',width:40,height:40,color:'rgba(255,255,255,0.10)',transform:'rotate(45deg)',pointerEvents:'none'}} />
-        <Lapa style={{position:'absolute',bottom:32,right:'33%',width:56,height:56,color:'rgba(253,224,71,0.18)',transform:'rotate(-12deg)',pointerEvents:'none'}} />
+      <section className="relative overflow-hidden animate-gradient py-20 lg:py-32" style={{background:'linear-gradient(135deg,#7c3aed,#a21caf,#6d28d9,#4f46e5,#7c3aed)',backgroundSize:'300% 300%'}}>
+        <Lapa className="animate-float" style={{position:'absolute',top:40,left:32,width:64,height:64,color:'rgba(255,255,255,0.15)',pointerEvents:'none'}} />
+        <Lapa className="animate-float2" style={{position:'absolute',top:128,right:64,width:48,height:48,color:'rgba(255,255,255,0.12)',pointerEvents:'none'}} />
+        <Lapa className="animate-drift" style={{position:'absolute',bottom:64,left:'25%',width:40,height:40,color:'rgba(255,255,255,0.10)',pointerEvents:'none'}} />
+        <Lapa className="animate-float" style={{position:'absolute',bottom:32,right:'33%',width:56,height:56,color:'rgba(253,224,71,0.20)',pointerEvents:'none',animationDelay:'2s'}} />
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-20 -left-20 w-96 h-96 bg-pink-400/20 rounded-full blur-[120px]"></div>
-          <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-blue-400/20 rounded-full blur-[120px]"></div>
+          <div className="animate-blob absolute -top-20 -left-20 w-96 h-96 rounded-full" style={{background:'rgba(244,114,182,0.25)',filter:'blur(80px)'}}></div>
+          <div className="animate-blob-delay absolute -bottom-20 -right-20 w-96 h-96 rounded-full" style={{background:'rgba(96,165,250,0.2)',filter:'blur(80px)'}}></div>
+          <div className="animate-blob absolute top-1/2 left-1/2 w-64 h-64 rounded-full" style={{background:'rgba(251,191,36,0.12)',filter:'blur(60px)',transform:'translate(-50%,-50%)'}}></div>
         </div>
 
         <div className="relative mx-auto max-w-[1200px] px-6 flex flex-col lg:flex-row items-center gap-12">

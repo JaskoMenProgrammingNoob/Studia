@@ -75,7 +75,7 @@ function App() {
         {/* MODAL REJESTRACJI */}
         {modalRej && (
           <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-6" onClick={() => { setModalRej(false); setBlad(''); setSukces(false); }}>
-            <div className="bg-white rounded-[2.5rem] p-10 max-w-md w-full shadow-2xl" onClick={e => e.stopPropagation()}>
+            <div className="bg-white rounded-[2.5rem] p-10 max-w-md w-full shadow-2xl overflow-y-auto max-h-[92vh]" onClick={e => e.stopPropagation()}>
               {sukces ? (
                 <div className="text-center py-8">
                   <div className="w-20 h-20 bg-violet-100 rounded-full flex items-center justify-center mx-auto mb-6">
