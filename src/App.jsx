@@ -37,7 +37,7 @@ function App() {
 
   return (
     <Router>
-      <div className="bg-white min-h-screen font-['Plus_Jakarta_Sans'] text-slate-900">
+      <div style={{background:'#f5f3ff'}} className="min-h-screen font-['Plus_Jakarta_Sans'] text-slate-900">
         <header className="sticky top-0 z-50 w-full border-b border-purple-100 bg-white/90 backdrop-blur-md px-6 py-4 md:px-20">
           <div className="mx-auto flex max-w-[1200px] items-center justify-between">
             <a href="/" className="flex items-center gap-3 cursor-pointer">
@@ -117,7 +117,7 @@ function App() {
                         />
                       </div>
                     ))}
-                    <button type="submit" disabled={ladowanie} className="bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-black py-4 rounded-2xl hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-60 mt-2">
+                    <button type="submit" disabled={ladowanie} style={{background:'#7c3aed',color:'white',fontWeight:900,padding:'16px',borderRadius:16,border:'none',cursor:'pointer',fontSize:15,marginTop:8,opacity:ladowanie?0.6:1}}>
                       {ladowanie ? 'Rejestrowanie...' : 'Zarejestruj się'}
                     </button>
                     <button type="button" onClick={() => { setModalRej(false); setBlad(''); }} className="bg-slate-100 text-slate-600 font-bold text-sm py-3 rounded-2xl hover:bg-slate-200 transition-all">

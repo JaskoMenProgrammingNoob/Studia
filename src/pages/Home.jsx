@@ -148,7 +148,7 @@ function Home({ uzytkownik }) {
       </section>
 
       {/* --- STATYSTYKI --- */}
-      <section className="py-16 bg-slate-50 relative overflow-hidden">
+      <section className="py-16 relative overflow-hidden" style={{background:'#ede9fe'}}>
         <Lapa style={{position:'absolute',right:32,top:16,width:80,height:80,color:'#ede9fe',transform:'rotate(12deg)',pointerEvents:'none'}} />
         <Lapa style={{position:'absolute',left:16,bottom:16,width:64,height:64,color:'#ffedd5',transform:'rotate(-6deg)',pointerEvents:'none'}} />
         <div className="mx-auto max-w-[1200px] px-6">
@@ -173,12 +173,12 @@ function Home({ uzytkownik }) {
         <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
           <div>
             <h2 className="text-5xl font-black tracking-tight text-slate-900 mb-4">
-              Nasi <span className="bg-gradient-to-r from-violet-600 to-fuchsia-500 bg-clip-text text-transparent">podopieczni</span>
+              Nasi <span style={{color:'#7c3aed'}}>podopieczni</span>
             </h2>
             <p className="text-slate-400 text-lg">Poznaj zwierzęta, które czekają właśnie na Ciebie</p>
           </div>
           <div className="flex bg-white p-2 rounded-2xl border border-slate-100 shadow-sm">
-            <button className="px-8 py-3 rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white text-sm font-bold shadow-lg">Wszystkie</button>
+            <button style={{background:'#7c3aed',color:'white',fontWeight:700,padding:'12px 32px',borderRadius:12,border:'none',cursor:'pointer'}}>Wszystkie</button>
             <button className="px-8 py-3 rounded-xl bg-slate-100 text-slate-600 text-sm font-bold hover:bg-slate-200 transition-all">Psy</button>
             <button className="px-8 py-3 rounded-xl bg-slate-100 text-slate-600 text-sm font-bold hover:bg-slate-200 transition-all">Koty</button>
           </div>
@@ -244,7 +244,7 @@ function Home({ uzytkownik }) {
       </section>
 
       {/* --- WESPRZYJ NAS --- */}
-      <section id="wesprzyj" className="py-24 bg-gradient-to-br from-slate-900 via-violet-950 to-slate-900 relative overflow-hidden">
+      <section id="wesprzyj" className="py-24 relative overflow-hidden" style={{background:'#1e1b4b'}}>
         <Lapa style={{position:'absolute',top:48,right:48,width:96,height:96,color:'rgba(255,255,255,0.05)',pointerEvents:'none'}} />
         <Lapa style={{position:'absolute',bottom:48,left:48,width:80,height:80,color:'rgba(255,255,255,0.05)',pointerEvents:'none'}} />
         <div className="mx-auto max-w-[1200px] px-6">
