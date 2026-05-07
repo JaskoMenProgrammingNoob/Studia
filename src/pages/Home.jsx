@@ -32,6 +32,7 @@ function Home({ uzytkownik }) {
   const [zwierzeta, setZwierzeta] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filtr, setFiltr] = useState('wszystkie');
+  const [pokazWszystkie, setPokazWszystkie] = useState(false);
   const [modalZbiorka, setModalZbiorka] = useState(null);
   const [kwota, setKwota] = useState('');
   const [sukcesZbiorka, setSukcesZbiorka] = useState(false);
@@ -97,6 +98,14 @@ function Home({ uzytkownik }) {
 
   const gatunkiDostepne = ['wszystkie', ...new Set(zwierzeta.map(p => p.gatunek).filter(Boolean))];
   const zwierzetaFiltrowane = filtr === 'wszystkie' ? zwierzeta : zwierzeta.filter(p => p.gatunek === filtr);
+  const zwierzetaWidoczne = pokazWszystkie ? zwierzetaFiltrowane : zwierzetaFiltrowane.slice(0, 6);
+
+  const labelGatunku = (g) => {
+    if (g === 'wszystkie') return 'Wszystkie';
+    if (g === 'pies') return 'Psy';
+    if (g === 'kot') return 'Koty';
+    return g.charAt(0).toUpperCase() + g.slice(1);
+  };
 
   const koloryCykl = [
     { cls: 'from-violet-500 to-fuchsia-500', hex: '#7c3aed', hexLight: '#ede9fe' },
@@ -189,20 +198,20 @@ function Home({ uzytkownik }) {
             {gatunkiDostepne.map(g => (
               <button
                 key={g}
-                onClick={() => setFiltr(g)}
+                onClick={() => { setFiltr(g); setPokazWszystkie(false); }}
                 style={filtr === g
                   ? {background:'#7c3aed',color:'white',fontWeight:700,padding:'10px 24px',borderRadius:12,border:'none',cursor:'pointer',fontSize:14}
                   : {background:'#f1f5f9',color:'#475569',fontWeight:700,padding:'10px 24px',borderRadius:12,border:'none',cursor:'pointer',fontSize:14}
                 }
               >
-                {g === 'wszystkie' ? 'Wszystkie' : g.charAt(0).toUpperCase() + g.slice(1) + 'y'}
+                {labelGatunku(g)}
               </button>
             ))}
           </div>
         </div>
 
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 text-left">
-          {zwierzetaFiltrowane.map((pet, i) => {
+          {zwierzetaWidoczne.map((pet, i) => {
             const k = koloryCykl[i % koloryCykl.length];
             return (
               <div key={pet._id} className="group relative rounded-[3rem] bg-white p-6 shadow-sm hover:shadow-2xl hover:-translate-y-4 transition-all duration-500 border border-slate-50 overflow-hidden">
@@ -231,6 +240,17 @@ function Home({ uzytkownik }) {
             );
           })}
         </div>
+
+        {zwierzetaFiltrowane.length > 6 && (
+          <div className="text-center mt-12">
+            <button
+              onClick={() => setPokazWszystkie(!pokazWszystkie)}
+              style={{background:pokazWszystkie?'#f1f5f9':'#7c3aed',color:pokazWszystkie?'#475569':'white',border:'none',borderRadius:16,padding:'16px 48px',fontWeight:900,fontSize:16,cursor:'pointer'}}
+            >
+              {pokazWszystkie ? 'Zwiń listę ↑' : `Pokaż wszystkie (${zwierzetaFiltrowane.length}) ↓`}
+            </button>
+          </div>
+        )}
       </main>
 
       {/* --- GALERIA --- */}
@@ -400,7 +420,7 @@ function Home({ uzytkownik }) {
                 <p className="text-right text-xs text-slate-400 mt-1">{formularzOpinia.tresc.length}/500</p>
               </div>
               <button type="submit" disabled={wysylanieOpinia}
-                className="bg-gradient-to-r from-pink-500 to-violet-600 text-white font-black py-4 rounded-2xl hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-60">
+                style={{background:'#7c3aed',color:'white',fontWeight:900,padding:'16px',borderRadius:16,border:'none',cursor:'pointer',fontSize:15,opacity:wysylanieOpinia?0.6:1,width:'100%'}}>
                 {wysylanieOpinia ? 'Wysyłanie...' : 'Dodaj opinię'}
               </button>
             </form>

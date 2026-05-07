@@ -109,6 +109,21 @@ async function startServer() {
             } catch { res.status(500).json({ error: "Błąd serwera" }); }
         });
 
+        // --- LOGOWANIE ---
+        app.post('/api/logowanie', async (req, res) => {
+            const { email, haslo } = req.body;
+            if (!email || !haslo) return res.status(400).json({ error: 'Wszystkie pola są wymagane.' });
+            if (typeof email !== 'string' || typeof haslo !== 'string') return res.status(400).json({ error: 'Nieprawidłowy typ danych.' });
+            try {
+                const user = await db.collection('Uzytkownicy').findOne({ email: email.toLowerCase() });
+                if (!user) return res.status(401).json({ error: 'Nieprawidłowy e-mail lub hasło.' });
+                const ok = await bcrypt.compare(haslo, user.haslo);
+                if (!ok) return res.status(401).json({ error: 'Nieprawidłowy e-mail lub hasło.' });
+                console.log(`🔑 Zalogowano: ${user.imie}`);
+                res.json({ message: 'Zalogowano!', imie: user.imie });
+            } catch { res.status(500).json({ error: 'Błąd serwera.' }); }
+        });
+
         // --- REJESTRACJA ---
         app.post('/api/rejestracja', async (req, res) => {
             const { imie, email, haslo } = req.body;

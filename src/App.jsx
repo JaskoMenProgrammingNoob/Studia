@@ -6,11 +6,36 @@ import Admin from './pages/Admin';
 
 function App() {
   const [modalRej, setModalRej] = useState(false);
+  const [modalLog, setModalLog] = useState(false);
   const [uzytkownik, setUzytkownik] = useState(null);
   const [form, setForm] = useState({ imie: '', email: '', haslo: '', powtorz: '' });
+  const [formLog, setFormLog] = useState({ email: '', haslo: '' });
   const [blad, setBlad] = useState('');
+  const [bladLog, setBladLog] = useState('');
   const [ladowanie, setLadowanie] = useState(false);
   const [sukces, setSukces] = useState(false);
+
+  const handleLogowanie = async (e) => {
+    e.preventDefault();
+    setBladLog('');
+    setLadowanie(true);
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/logowanie`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: formLog.email, haslo: formLog.haslo }),
+      });
+      const data = await res.json();
+      if (!res.ok) { setBladLog(data.error); return; }
+      setUzytkownik(data.imie);
+      setModalLog(false);
+      setFormLog({ email: '', haslo: '' });
+    } catch {
+      setBladLog('Brak połączenia z serwerem.');
+    } finally {
+      setLadowanie(false);
+    }
+  };
 
   const handleRejestracja = async (e) => {
     e.preventDefault();
@@ -59,9 +84,14 @@ function App() {
                   </button>
                 </div>
               ) : (
-                <button onClick={() => setModalRej(true)} className="px-5 py-2.5 bg-violet-600 text-white font-black text-sm rounded-xl shadow-md hover:bg-violet-700 hover:-translate-y-0.5 transition-all">
-                  Zarejestruj się
-                </button>
+                <div className="flex items-center gap-2">
+                  <button onClick={() => setModalLog(true)} style={{background:'#f1f5f9',color:'#475569',border:'none',borderRadius:12,padding:'10px 20px',fontWeight:700,fontSize:14,cursor:'pointer'}}>
+                    Zaloguj się
+                  </button>
+                  <button onClick={() => setModalRej(true)} style={{background:'#7c3aed',color:'white',border:'none',borderRadius:12,padding:'10px 20px',fontWeight:700,fontSize:14,cursor:'pointer'}}>
+                    Zarejestruj się
+                  </button>
+                </div>
               )}
             </div>
           </div>
@@ -76,6 +106,42 @@ function App() {
         <footer className="mt-20 border-t border-slate-100 py-10 text-center text-slate-400 text-sm">
           <p>© 2026 Łapa Pomocy. Projekt Fullstack MERN.</p>
         </footer>
+
+        {/* MODAL LOGOWANIA */}
+        {modalLog && (
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-6" onClick={() => { setModalLog(false); setBladLog(''); }}>
+            <div className="bg-white rounded-[2.5rem] p-10 max-w-md w-full shadow-2xl" onClick={e => e.stopPropagation()}>
+              <div className="flex items-center gap-3 mb-8">
+                <div style={{width:48,height:48,borderRadius:16,background:'#7c3aed',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                  <span className="material-symbols-outlined text-white text-2xl">login</span>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-black text-slate-900">Logowanie</h3>
+                  <p className="text-slate-400 text-sm">Witaj z powrotem!</p>
+                </div>
+              </div>
+              {bladLog && <p className="bg-red-50 text-red-500 font-bold text-sm px-4 py-3 rounded-2xl mb-4">{bladLog}</p>}
+              <form onSubmit={handleLogowanie} className="flex flex-col gap-4">
+                <div>
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1.5 block">E-mail</label>
+                  <input required type="email" placeholder="jan@mail.pl" value={formLog.email} onChange={e => setFormLog({...formLog, email: e.target.value})}
+                    className="w-full border-2 border-slate-200 rounded-2xl px-5 py-3.5 font-bold text-slate-900 outline-none focus:border-violet-400 transition-all" />
+                </div>
+                <div>
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1.5 block">Hasło</label>
+                  <input required type="password" placeholder="••••••••" value={formLog.haslo} onChange={e => setFormLog({...formLog, haslo: e.target.value})}
+                    className="w-full border-2 border-slate-200 rounded-2xl px-5 py-3.5 font-bold text-slate-900 outline-none focus:border-violet-400 transition-all" />
+                </div>
+                <button type="submit" disabled={ladowanie} style={{background:'#7c3aed',color:'white',fontWeight:900,padding:'16px',borderRadius:16,border:'none',cursor:'pointer',fontSize:15,marginTop:8,opacity:ladowanie?0.6:1}}>
+                  {ladowanie ? 'Logowanie...' : 'Zaloguj się'}
+                </button>
+                <button type="button" onClick={() => { setModalLog(false); setBladLog(''); setModalRej(true); }} style={{background:'#f1f5f9',color:'#475569',fontWeight:700,padding:'12px',borderRadius:16,border:'none',cursor:'pointer',fontSize:14}}>
+                  Nie masz konta? Zarejestruj się
+                </button>
+              </form>
+            </div>
+          </div>
+        )}
 
         {/* MODAL REJESTRACJI */}
         {modalRej && (
